@@ -83,8 +83,8 @@ async def run(bot, message):
                  last_msg_id = int(limit_msg.text) # Using last_msg_id as limit/count
 
     elif fromid.text and not fromid.forward_date:
-        regex = re.compile(r"(https://)?(t\.me/|telegram\.me/|telegram\.dog/)(c/)?(\d+|[a-zA-Z_0-9]+)/(\d+)$")
-        match = regex.match(fromid.text.replace("?single", ""))
+        regex = re.compile(r"(https://)?(t\.me/|telegram\.me/|telegram\.dog/)(c/)?(\d+|[a-zA-Z_0-9]+)/(?:\d+/)?(\d+)$")
+        match = regex.match(fromid.text.replace("?single", "").rstrip('/'))
         if not match:
             return await message.reply('Invalid link')
         chat_id = match.group(4)
